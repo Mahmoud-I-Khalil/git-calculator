@@ -1,3 +1,5 @@
+import java.time.Instant;
+import java.util.Random;
 
 class Calculator {
 
@@ -25,7 +27,7 @@ class Calculator {
     /*
     Returns the n'th number in the fibonacci sequence
     https://en.wikipedia.org/wiki/Fibonacci_number
-    Example below a
+    Example below
     n = x
     1 = 1
     2 = 1
@@ -38,7 +40,21 @@ class Calculator {
     etc
      */
     int fibonacciNumberFinder(int n){
-        return 0;
+        if (n <= 1) {
+            return n;
+        }
+
+        int prevPrev = 0;
+        int prev = 1;
+        int result = 0;
+
+        for (int i = 2; i <= n; i++) {
+            result = prevPrev + prev;
+            prevPrev = prev;
+            prev = result;
+        }
+
+        return result;
     }
 
 
@@ -50,7 +66,8 @@ class Calculator {
     if int a = 16 then this method returns: 10000
      */
     String intToBinaryNumber(int number){
-        return null;
+
+        return Integer.toBinaryString(number);
     }
 
     /*
@@ -62,7 +79,18 @@ class Calculator {
     if you run this function twice with the same String input, it must return 2 unique String IDs
      */
     String createUniqueID(String n){
-        return null;
+
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        Random rnd = new Random();
+        StringBuilder randomSequence = new StringBuilder(10);
+
+        for (int i = 0; i < 10; i++) {
+            randomSequence.append(characters.charAt(rnd.nextInt(characters.length())));
+        }
+
+        String timestamp = Long.toString(Instant.now().toEpochMilli());
+
+        return n + timestamp + randomSequence.toString();
     }
 
 
